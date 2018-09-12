@@ -42,55 +42,55 @@ class Auth extends Component {
         }
     }
 
-    checkValidity ( value, rules ) {
+    checkValidity(value, rules) {
         let isValid = true;
-        if ( !rules ) {
+        if (!rules) {
             return true;
         }
 
-        if ( rules.required ) {
+        if (rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
 
-        if ( rules.minLength ) {
+        if (rules.minLength) {
             isValid = value.length >= rules.minLength && isValid;
         }
 
-        if ( rules.maxLength ) {
+        if (rules.maxLength) {
             isValid = value.length <= rules.maxLength && isValid;
         }
 
         return isValid;
     }
 
-    inputChangedHandler = ( event, controlName ) => {
+    inputChangedHandler = (event, controlName) => {
         const updatedControls = {
             ...this.state.controls,
-            [ controlName ]: {
-                ...this.state.controls[ controlName ],
+            [controlName]: {
+                ...this.state.controls[controlName],
                 value: event.target.value,
-                valid: this.checkValidity( event.target.value, this.state.controls[ controlName ].validation ),
+                valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
             }
         };
-        this.setState( { controls: updatedControls } );
+        this.setState({ controls: updatedControls });
     }
 
-    submitHandler = ( event ) => {
+    submitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth( this.state.controls.email.value, this.state.controls.password.value );
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
     }
 
-    render () {
+    render() {
         const formElementsArray = [];
-        for ( let key in this.state.controls ) {
-            formElementsArray.push( {
+        for (let key in this.state.controls) {
+            formElementsArray.push({
                 id: key,
-                config: this.state.controls[ key ]
-            } );
+                config: this.state.controls[key]
+            });
         }
 
-        const form = formElementsArray.map( formElement => (
+        const form = formElementsArray.map(formElement => (
             <Input
                 key={formElement.id}
                 elementType={formElement.config.elementType}
@@ -99,8 +99,8 @@ class Auth extends Component {
                 invalid={!formElement.config.valid}
                 shouldValidate={formElement.config.validation}
                 touched={formElement.config.touched}
-                changed={( event ) => this.inputChangedHandler( event, formElement.id )} />
-        ) );
+                changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+        ));
 
         return (
             <div className={classes.Auth}>
@@ -115,8 +115,8 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: ( email, password ) => dispatch( actions.auth( email, password ) )
+        onAuth: (email, password) => dispatch(actions.auth(email, password))
     };
 };
 
-export default connect( null, mapDispatchToProps )( Auth );
+export default connect(null, mapDispatchToProps)(Auth);
