@@ -1,8 +1,9 @@
-import { delay } from 'redux-saga';
+// import { delay } from 'redux-saga';
 import { put, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import * as actions from '../actions/index';
+const delay = ms => new Promise(res => setTimeout(res, ms));
 
 export function* logoutSaga(action) {
   yield call([localStorage, 'removeItem'], 'token');
