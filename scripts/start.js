@@ -1,3 +1,5 @@
+'use strict';
+
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
@@ -22,7 +24,7 @@ const {
   choosePort,
   createCompiler,
   prepareProxy,
-  prepareUrls
+  prepareUrls,
 } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
@@ -68,14 +70,7 @@ choosePort(HOST, DEFAULT_PORT)
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(protocol, HOST, port);
     // Create a webpack compiler that is configured with custom messages.
-    // const compiler = createCompiler(webpack, config, appName, urls, useYarn);
-    const compiler = createCompiler({
-      webpack,
-      config,
-      appName,
-      urls,
-      useYarn
-    });
+    const compiler = createCompiler(webpack, config, appName, urls, useYarn);
     // Load proxy config
     const proxySetting = require(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(proxySetting, paths.appPublic);
