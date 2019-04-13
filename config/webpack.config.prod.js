@@ -186,19 +186,7 @@ module.exports = {
                       options: {
                         // Necessary for external CSS imports to work
                         // https://github.com/facebookincubator/create-react-app/issues/2677
-                        ident: 'postcss',
-                        plugins: () => [
-                          require('postcss-flexbugs-fixes'),
-                          autoprefixer({
-                            browsers: [
-                              '>1%',
-                              'last 4 versions',
-                              'Firefox ESR',
-                              'not ie < 9' // React doesn't support IE8 anyway
-                            ],
-                            flexbox: 'no-2009'
-                          })
-                        ]
+                        ident: 'postcss'
                       }
                     }
                   ]
@@ -281,19 +269,25 @@ module.exports = {
     // }),
     {
       optimization: {
-        minimizer: [
-          // we specify a custom UglifyJsPlugin here to get source maps in production
-          new UglifyJsPlugin({
-            cache: true,
-            parallel: true,
-            uglifyOptions: {
-              compress: false,
-              ecma: 6,
-              mangle: true
-            },
-            sourceMap: true
-          })
-        ]
+        minimizer: [],
+
+        optimization: {
+          minimize: true,
+
+          minimizer: [
+            // we specify a custom UglifyJsPlugin here to get source maps in production
+            new UglifyJsPlugin({
+              cache: true,
+              parallel: true,
+              uglifyOptions: {
+                compress: false,
+                ecma: 6,
+                mangle: true
+              },
+              sourceMap: true
+            })
+          ]
+        }
       }
     },
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
