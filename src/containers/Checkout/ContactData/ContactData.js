@@ -13,6 +13,7 @@ import { updateObject, checkValidity } from '../../../shared/utility';
 const contactData = props => {
   const [orderForm, setOrderForm] = useState({
     name: {
+      name: 'name',
       elementType: 'input',
       elementConfig: {
         type: 'text',
@@ -27,6 +28,7 @@ const contactData = props => {
       touched: false
     },
     street: {
+      name: 'street',
       elementType: 'input',
       elementConfig: {
         type: 'text',
@@ -41,6 +43,7 @@ const contactData = props => {
       touched: false
     },
     zipCode: {
+      name: 'zipCode',
       elementType: 'input',
       elementConfig: {
         type: 'text',
@@ -58,11 +61,12 @@ const contactData = props => {
       touched: false
     },
     country: {
+      name: 'country',
       elementType: 'input',
       elementConfig: {
         type: 'text',
         placeholder: 'Country',
-        autoComplete: 'country-name'
+        autoComplete: 'country'
       },
       value: '',
       validation: {
@@ -72,6 +76,7 @@ const contactData = props => {
       touched: false
     },
     email: {
+      name: 'email',
       elementType: 'input',
       elementConfig: {
         type: 'email',
@@ -87,6 +92,7 @@ const contactData = props => {
       touched: false
     },
     deliveryMethod: {
+      name: 'deliveryMethod',
       elementType: 'select',
       elementConfig: {
         options: [
